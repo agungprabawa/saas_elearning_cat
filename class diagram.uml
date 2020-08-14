@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>PHP</ID>
+  <OriginalElement>\App\Http\Controllers\SrvAdmin\Learning\CoursesController</OriginalElement>
+  <nodes>
+    <node x="712.0" y="0.0">\Illuminate\Foundation\Auth\Access\AuthorizesRequests</node>
+    <node x="455.99999999999994" y="12.0">\Illuminate\Routing\Controller</node>
+    <node x="673.8" y="237.0">\App\Http\Controllers\Controller</node>
+    <node x="615.25" y="417.0">\App\Http\Controllers\SrvAdmin\Learning\CoursesController</node>
+    <node x="15.25" y="637.0">\App\Http\Controllers\Student\AssistedTest\ExamController</node>
+    <node x="302.25" y="637.0">\App\Http\Controllers\SrvAdmin\PaymentController</node>
+    <node x="0.0" y="33.0">\Illuminate\Foundation\Validation\ValidatesRequests</node>
+    <node x="1086.0" y="55.0">\Illuminate\Foundation\Bus\DispatchesJobs</node>
+    <node x="884.25" y="340.0">\App\Http\Controllers\SrvAdmin\AssistedTest\ExamController</node>
+    <node x="1148.25" y="703.0">\App\Http\Controllers\Student\Learning\CoursesController</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="\App\Http\Controllers\Controller" target="\Illuminate\Foundation\Bus\DispatchesJobs">
+      <point x="45.375" y="-26.5" />
+      <point x="779.675" y="217.0" />
+      <point x="1164.0" y="217.0" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="\App\Http\Controllers\Student\Learning\CoursesController" target="\App\Http\Controllers\Controller">
+      <point x="0.0" y="-71.5" />
+      <point x="1254.75" y="310.0" />
+      <point x="782.6999999999998" y="310.0" />
+      <point x="48.39999999999998" y="26.5" />
+    </edge>
+    <edge source="\App\Http\Controllers\Student\AssistedTest\ExamController" target="\App\Http\Controllers\Controller">
+      <point x="0.0" y="-137.5" />
+      <point x="148.75" y="310.0" />
+      <point x="685.8999999999999" y="310.0" />
+      <point x="-48.39999999999998" y="26.5" />
+    </edge>
+    <edge source="\App\Http\Controllers\Controller" target="\Illuminate\Routing\Controller">
+      <point x="-15.125" y="-26.5" />
+      <point x="719.175" y="207.0" />
+      <point x="574.0" y="207.0" />
+      <point x="0.0" y="81.5" />
+    </edge>
+    <edge source="\App\Http\Controllers\Controller" target="\Illuminate\Foundation\Auth\Access\AuthorizesRequests">
+      <point x="15.125" y="-26.5" />
+      <point x="749.425" y="207.0" />
+      <point x="889.0" y="207.0" />
+      <point x="0.0" y="93.5" />
+    </edge>
+    <edge source="\App\Http\Controllers\SrvAdmin\PaymentController" target="\App\Http\Controllers\Controller">
+      <point x="5.6843418860808015E-14" y="-137.5" />
+      <point x="448.75000000000006" y="320.0" />
+      <point x="710.0999999999999" y="320.0" />
+      <point x="-24.200000000000045" y="26.5" />
+    </edge>
+    <edge source="\App\Http\Controllers\Controller" target="\Illuminate\Foundation\Validation\ValidatesRequests">
+      <point x="-45.375" y="-26.5" />
+      <point x="688.925" y="217.0" />
+      <point x="218.0" y="217.0" />
+      <point x="0.0" y="60.5" />
+    </edge>
+    <edge source="\App\Http\Controllers\SrvAdmin\AssistedTest\ExamController" target="\App\Http\Controllers\Controller">
+      <point x="0.0" y="-434.5" />
+      <point x="1006.25" y="320.0" />
+      <point x="758.5" y="320.0" />
+      <point x="24.200000000000045" y="26.5" />
+    </edge>
+    <edge source="\App\Http\Controllers\SrvAdmin\Learning\CoursesController" target="\App\Http\Controllers\Controller">
+      <point x="0.0" y="-357.5" />
+      <point x="739.75" y="320.0" />
+      <point x="734.3" y="320.0" />
+      <point x="0.0" y="26.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="611.5714285714284" y="442.8571428571428" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constants</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

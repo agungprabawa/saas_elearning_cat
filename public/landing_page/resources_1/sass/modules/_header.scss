@@ -1,0 +1,216 @@
+.header-navigation {
+    background-color: transparent;
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+    z-index: 999;
+    .thm-container {
+        position: relative;
+        .navbar-header {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+        }
+        .navbar-brand {
+            height: auto;
+            padding: 0px 0;
+            .default-logo {
+                display: inline-block;
+            }
+            .sticky-logo {
+                display: none;
+            }
+        }
+        .main-navigation {
+            text-align: right;
+            padding: 0;
+        }
+    }
+    ul.navigation-box {
+        float: none;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: right;
+        li a .sub-nav-toggler {
+            display: none;
+        }
+        >li {
+            position: relative;
+            padding: 17.5px 0;
+            display: inline-block;
+        }
+        >li+li {
+            margin-left: 50px;
+        }
+        >li.active>a,
+        >li.current>a,
+        >li>a:active,
+        >li>a:focus,
+        >li:hover>a {
+            color: #FFB55D;
+        }
+        >li>a {
+            padding: 0;
+            color: #41508A;
+            font-size: 16px;
+            transition: all .4s ease;
+            font-weight: 600;
+            display: inline-block;
+        }
+        >li>ul.sub-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 100000;
+            float: left;
+            min-width: 215px;
+            padding: 20px 0px;
+            text-align: left;
+            list-style: none;
+            background-color: #fff;
+            background-clip: padding-box; // border-top: 4px solid #ff7f45;
+            opacity: 0;
+            visibility: hidden;
+            border-radius: 5px;
+            -webkit-transition: opacity .4s ease, visibility .4s ease;
+            transition: opacity .4s ease, visibility .4s ease;
+            box-shadow: drop-shadow-converter(#41508A, $angle: 90, $distance: 10px, $spread: 0, $size: 30px, $opacity: 20%);
+            &:before {
+                content: '';
+                position: absolute;
+                top:-10px;
+                left: 18px;
+                width: 21px;
+                height: 10px;
+                background: transparent url(../img/drop-menu-arrow.png) 0 0 no-repeat;
+            }
+        }
+        >li>ul.sub-menu.right-align {
+            left: auto;
+            right: 0;
+            &:before {
+                left: auto;
+                right: 18px;
+            }
+        }
+        >li:hover>ul.sub-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+        >li>ul.sub-menu>li {
+            display: block;
+            position: relative;
+        }
+        >li>ul.sub-menu>li>a {
+            font-size: 16px;
+            color: #7A7F93;
+            font-weight: 500;
+            padding: 11.5px 0;
+            display: block;
+            line-height: 26px;
+            padding-left: 40px; // letter-spacing: .02em;
+            white-space: nowrap;
+            -webkit-transition: all .4s ease;
+            transition: all .4s ease;
+        }
+        >li>.sub-menu li+li {
+            // border-top: 1px solid #E2E2E2;
+            // margin-top: 12px;
+        }
+        >li>.sub-menu li:hover>a {
+            // background: #F9B522; // border-color: #ff7f45;
+            color: #41508A;
+            position: relative;
+        }
+
+        >li>.sub-menu>li>ul.sub-menu {
+            position: absolute;
+            top: 0%;
+            left: 100%;
+            z-index: 100000;
+            float: left;
+            min-width: 215px;
+            padding: 0px 0px;
+            text-align: left;
+            list-style: none;
+            background-color: #fff;
+            background-clip: padding-box; // border-top: 4px solid #ff7f45;
+            opacity: 0;
+            visibility: hidden;
+            -webkit-transition: opacity .4s ease, visibility .4s ease;
+            transition: opacity .4s ease, visibility .4s ease;
+            box-shadow: drop-shadow-converter(#000000, $angle: 90, $distance: 5px, $spread: 0, $size: 10px, $opacity: 20%);
+        }
+        >li>.sub-menu>li:hover>ul.sub-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+        >li>.sub-menu>li>ul.sub-menu>li {
+            display: block;
+            position: relative;
+        }
+        >li>.sub-menu>li>ul.sub-menu>li>a {
+            font-size: 16px;
+            color: #717171;
+            font-weight: 500;
+            padding: 11.5px 0;
+            display: block;
+            line-height: 26px;
+            padding-left: 40px; // letter-spacing: .02em;
+            white-space: nowrap;
+            -webkit-transition: all .4s ease;
+            transition: all .4s ease;
+        }
+        >li>.sub-menu>li>.sub-menu li+li {
+            // border-top: 1px solid #E2E2E2;
+            // margin-top: 12px;
+        }
+        >li>.sub-menu>li>.sub-menu li:hover>a {
+            background: #F1F1F1;
+            color: #181818; // border-color: #ff7f45;
+            position: relative;
+        }
+    }
+    &.stricky-fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        background:#fff;
+        box-shadow: drop-shadow-converter(#000000, $angle: 90, $distance: 0px, $spread: 0, $size: 16px, $opacity: 32%);
+        .thm-container {
+            box-shadow: none;
+        }
+        .navbar-brand {
+            .default-logo {
+                display: none;
+            }
+            .sticky-logo {
+                display: inline-block;
+            }
+        }
+        ul.navigation-box>li {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+    }
+}
+
+
+.header-home-one {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    &.inner-header {
+        top: 0;
+        border-bottom: 2px solid rgba(#41508a, .1);
+        .header-navigation ul.navigation-box > li{padding: 43.5px 0;}
+        .stricky-fixed.header-navigation {
+            ul.navigation-box > li{padding: 20px 0;}
+        }
+    }
+}

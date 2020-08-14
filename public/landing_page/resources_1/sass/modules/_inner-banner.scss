@@ -1,0 +1,15 @@
+.inner-banner {
+	background: transparent url(../img/inner-banner-bg.png) center top no-repeat;
+	background-size: cover;
+	padding-top: 215px;
+	padding-bottom: 235px;
+	+ div,
+	+ section {padding-top: 100px;}
+	.breadcumb {
+		margin: 0;padding: 0;list-style: none;
+		li {display: inline-block;vertical-align: middle;}
+		li a, li span {display: block;color: #7A7F93;font-size: 16px;}
+		li span.sep {margin-left: 10px;margin-right: 10px;}
+	}
+	h3 {margin: 0;font-size: 60px;color: #41508A;font-weight: 400;}
+}

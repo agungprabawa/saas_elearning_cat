@@ -1,0 +1,19 @@
+.img-box-style-one {
+	padding: 120px 0;
+	.text-box {
+		h3, p {
+			margin: 0;
+		}
+		h3 {font-size: 36px;line-height: 40px;color: #41508A;font-weight: 400;}
+		p {color: #7A7F93;font-weight: 500;font-size: 18px;line-height: 36px;width: 81%;margin-top: 40px;margin-bottom: 50px;}
+		a.img-box-btn {display: inline-block;width: 200px;height: 61px;border-radius: 30px;color: #FFFFFF;font-size: 16px;font-weight: 600;background:#FFB55D;transition: all .4s ease;text-align: center;line-height: 61px;
+			&:hover {background:#41508A;}
+		}
+	}
+	.img-box + .text-box {
+		margin-top: 110px;
+	}
+	.text-box + .img-box {
+		margin-top: 120px;
+	}
+}

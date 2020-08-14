@@ -1,0 +1,178 @@
+/***************************************************************************************************************
+||||||||||||||||||||||||||               MASTER STYLESHEET FOR Binmp                ||||||||||||||||||||||||||||
+****************************************************************************************************************
+||||||||||||||||||||||||||||              TABLE OF CONTENT                  ||||||||||||||||||||||||||||||||||||
+****************************************************************************************************************
+****************************************************************************************************************
+* 1. imported styles 
+* 2. miscelnious styles 
+* 3. header styles 
+* 4. search popup styles 
+* 5. banner styles 
+* 6. features styles 
+* 7. faq styles 
+* 8. testimonials styles 
+* 9. team styles 
+* 10. brand styles 
+* 11. contact styles 
+* 12. footer styles 
+* 13. cta styles 
+* 14. subscribe styles 
+* 15. inner banner styles 
+* 16. fun fact styles 
+* 17. blog styles 
+* 18. 404 styles 
+* 19. img box styles 
+* 20. app screenshot styles 
+* 21. video box styles 
+* 22. pricing styles 
+* 23. sidebar styles 
+****************************************************************************************************************
+||||||||||||||||||||||||||||            End TABLE OF CONTENT                ||||||||||||||||||||||||||||||||||||
+****************************************************************************************************************/
+
+
+// math functions are not included in sass
+@import "drop-shadow-converter/mathfunctions";
+// import converter
+@import "drop-shadow-converter/drop-shadow-converter";
+// template sass helper functions
+@import "_helper-function.scss";
+
+/************************** 
+* 1. imported styles 
+***************************/
+
+@import 'modules/_imported';
+
+/************************** 
+* 2. miscelnious styles 
+***************************/
+
+@import 'modules/_miscelnious';
+
+/************************** 
+* 3. header styles 
+***************************/
+
+@import 'modules/_header';
+
+/************************** 
+* 4. search popup styles 
+***************************/
+
+@import 'modules/_search-popup';
+
+/************************** 
+* 5. banner styles 
+***************************/
+
+@import 'modules/_banner';
+
+/************************** 
+* 6. features styles 
+***************************/
+
+@import 'modules/_features';
+
+/************************** 
+* 7. faq styles 
+***************************/
+
+@import 'modules/_faq';
+
+/************************** 
+* 8. testimonials styles 
+***************************/
+
+@import 'modules/_testimonials';
+
+/************************** 
+* 9. team styles 
+***************************/
+
+@import 'modules/_team';
+
+/************************** 
+* 10. brand styles 
+***************************/
+
+@import 'modules/_brand';
+
+/************************** 
+* 11. contact styles 
+***************************/
+
+@import 'modules/_contact';
+
+/************************** 
+* 12. footer styles 
+***************************/
+
+@import 'modules/_footer';
+
+/************************** 
+* 13. cta styles 
+***************************/
+
+@import 'modules/_cta';
+
+/************************** 
+* 14. subscribe styles 
+***************************/
+
+@import 'modules/_subscribe';
+
+/************************** 
+* 15. inner banner styles 
+***************************/
+
+@import 'modules/_inner-banner';
+
+/************************** 
+* 16. fun fact styles 
+***************************/
+
+@import 'modules/_fun-fact';
+
+/************************** 
+* 17. blog styles 
+***************************/
+
+@import 'modules/_blog';
+
+/************************** 
+* 18. 404 styles 
+***************************/
+
+@import 'modules/_error-404';
+
+/************************** 
+* 19. img box styles 
+***************************/
+
+@import 'modules/_img-box';
+
+/************************** 
+* 20. app screenshot styles 
+***************************/
+
+@import 'modules/_app-screenshot';
+
+/************************** 
+* 21. video box styles 
+***************************/
+
+@import 'modules/_video-box';
+
+/************************** 
+* 22. pricing styles 
+***************************/
+
+@import 'modules/_pricing';
+
+/************************** 
+* 23. sidebar styles 
+***************************/
+
+@import 'modules/_sidebar';

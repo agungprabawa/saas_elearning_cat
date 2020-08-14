@@ -1,0 +1,35 @@
+.bg-style-two {
+	+ .footer-top {
+		&:before {
+			background-color: #E8ECF6;
+		}
+	}
+}
+.footer-top {
+	background:#fff;
+	padding: 57.5px 0;
+	position: relative;
+	margin-top: 315px;
+	&:before {
+		content: '';
+		width: 100%;
+		height: 314px;
+		position: absolute;
+		bottom: 100%;
+		left: 0;
+		background:transparent url(../img/footer-curve.png) center center no-repeat;
+	}
+	.social {
+		padding: 5px 0;
+		line-height: 1em;
+		a {font-size: 20px;color: #6278CD;line-height: 1em;
+			+ a {margin-left: 45px;}
+		}
+	}
+}
+.footer-bottom {
+	background:#FFFFFF;
+	padding: 52px 0;
+	border-top: 2px solid #eff2fb;
+	p {margin: 0;color: #7a7f93;font-size: 16px;font-weight: 500;}
+}

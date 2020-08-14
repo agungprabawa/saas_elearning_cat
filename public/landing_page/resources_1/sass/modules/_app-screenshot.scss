@@ -1,0 +1,93 @@
+
+.app-screenshot-style-one {
+    padding: 120px 0;
+    padding-bottom: 240px;
+    @media (max-width: 1280px) {
+        padding-bottom: 200px;
+    }
+    .title {
+        margin-bottom: 120px;
+        h3 {
+            text-align: center;
+            margin: 0;
+            color: #41508a;
+            font-size: 46px;
+            font-weight: normal;
+        }
+    }
+    .owl-theme .owl-nav {
+        margin-top: 50px;
+        [class*=owl-] {margin: 10px;padding: 0;width: 40px;height: 40px;background:rgba(#343434, .1);line-height: 40px;color: #343434;
+            &:hover {background:rgba(#41508A, 1);color: #fff;}
+        }
+    }
+    .owl-theme .owl-dots {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        margin-top: 100px;
+        text-align: center;
+        z-index: 999;
+
+        @media (max-width: 1280px) {
+            margin-top: 60px;
+        }
+    }
+    .owl-theme .owl-dots .owl-dot span {
+        width: 7px;
+        height: 7px;
+        margin: 0px 2.5px;
+    }
+    .owl-theme .owl-dots .owl-dot:hover span,
+    .owl-theme .owl-dots .owl-dot.active span {
+        background: #41508A;
+    }
+    .owl-carousel {
+        z-index: 99;
+        padding-top: 0px;
+        padding-bottom: 5px;
+        &:before {
+            content: url(../img/screenshot-moc-1-1.png);
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -48.9%);
+        }
+        @media (max-width: 1366px) {
+            &:before {
+                content: url(../img/screenshot-moc-1-2.png);
+            }    
+        }
+        @media (max-width: 1280px) {
+            &:before {
+                transform: translate(-50%, -53%) scale(.9);
+            }    
+        }
+    }
+    .thm-container {max-width: 1600px;}
+
+}
+
+
+.app-screenshot-style-two {
+	padding: 120px 0;
+	.title {
+    	margin-bottom: 60px;
+        h3 {
+        	text-align: center;
+            margin: 0;
+            color: #41508a;
+            font-size: 46px;
+            font-weight: normal;
+        }
+    }
+    img {
+    	border-radius: 5px;
+    	box-shadow: drop-shadow-converter(#41508A, $angle: 90, $distance: 0px, $spread: 0, $size: 60px, $opacity: 10%);
+    	+ img {margin-top: 60px;}
+    }
+    [class*=col-]:nth-child(2) {
+		img {margin-top: 120px;}
+    }
+}

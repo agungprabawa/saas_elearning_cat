@@ -1,0 +1,10 @@
+.error-404-page {
+	background: transparent url(../img/404-bg.jpg) center bottom no-repeat;
+	background-size: cover;
+	padding-top: 120px;
+	padding-bottom: 60px;
+	h3 {margin: 0;font-size: 60px;line-height: 60px;color: #41508A;font-weight: 400;margin-top: 170px;margin-bottom: 50px;}
+	a.error-btn {display: inline-block;
+			border: none;outline: none;background:#6278CD;width: 205px;height: 61px;line-height: 61px;border-radius: 30.5px;text-align: center;color: #FFFFFF;font-size: 16px;font-weight: 600;transition: all .4s ease;
+			&:hover {background:#FFB55D;}}
+}

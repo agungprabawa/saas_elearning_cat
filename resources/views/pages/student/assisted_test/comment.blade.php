@@ -1,0 +1,1 @@
+<comment :user="{{ auth()->user() }}" :contentdata="{{ $exam }}" type_post="2"></comment>

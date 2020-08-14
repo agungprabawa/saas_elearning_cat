@@ -1,0 +1,12 @@
+.brand-section {
+	border-top: 2px solid #DDE1EF;
+	&.bdt-none {border-top: none;}
+}
+.brand-carousel {
+	text-align: center;
+	padding: 58px 0;
+	.owl-nav {display: none;margin: 0;}
+	i {font-size: 150px;color: rgba(#6278CD, .3);transition: all .4s ease;
+		&:hover {color: rgba(#6278CD, 1);}
+	}
+}
