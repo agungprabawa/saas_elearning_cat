@@ -54,13 +54,13 @@ function formatSize($bytes)
     if (($bytes >= 0) && ($bytes < $kb)) {
         return $bytes . ' B';
     } elseif (($bytes >= $kb) && ($bytes < $mb)) {
-        return round($bytes / $kb,2) . ' KB';
+        return round($bytes / $kb, 2) . ' KB';
     } elseif (($bytes >= $mb) && ($bytes < $gb)) {
-        return round($bytes / $mb,2) . ' MB';
+        return round($bytes / $mb, 2) . ' MB';
     } elseif (($bytes >= $gb) && ($bytes < $tb)) {
-        return round($bytes / $gb,2) . ' GB';
+        return round($bytes / $gb, 2) . ' GB';
     } elseif ($bytes >= $tb) {
-        return round($bytes / $tb,2) . ' TB';
+        return round($bytes / $tb, 2) . ' TB';
     } else {
         return $bytes . ' B';
     }
@@ -116,7 +116,6 @@ function transactionStatus($token)
     $responses = $XGateway->getInvoice($token);
 
     return $responses['status'];
-
 }
 
 function createTransaction($external_id, $amount, $payer_email, $description, $success_redirect_url)
@@ -143,7 +142,8 @@ function formatDateTime($date)
     return \Carbon\Carbon::parse($date)->formatLocalized('%A, %d %h %Y, %H:%M');
 }
 
-function formatDateOnly($date){
+function formatDateOnly($date)
+{
     if (empty($date)) {
         return '-';
     }
@@ -181,4 +181,9 @@ function set_db_lang_format()
     if ($lang->lang != $my->lang) {
         DB::statement('SET lc_time_names = ?', [$my->lang]);
     }
+}
+
+function asset_company($path, $secure = null)
+{
+    return app('url')->asset('/storage/companies/'.$path, $secure);
 }

@@ -147,7 +147,7 @@
                     <div class="kt-grid__item kt-grid__item--fluid kt-wizard-v4__wrapper">
 
                         <!--begin: Form Wizard Form-->
-                        <form class="kt-form" id="kt_form">
+                        <form class="kt-form" id="kt_form" enctype="multipart/form-data">
                             <!--begin: Form Wizard Step 1-->
                             <div class="kt-wizard-v4__content" data-ktwizard-type="step-content" data-ktwizard-state="current">
                                 <div class="kt-heading kt-heading--md">@lang('courses.tab-1-title')</div>
@@ -185,15 +185,13 @@
                                             <div class="col-xl-6">
                                                 <div class="form-group">
                                                     <label>@lang('courses.tab-1-f-4')</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-btn">
-                                                            <a id="lfm" data-input="thumbnail" data-preview="holder" class="custom-file-label">
-                                                                <i class="fa fa-picture-o "></i> @lang('courses.tab-1-f-4-placeholder')
-                                                            </a>
-                                                        </span>
-                                                        <input id="thumbnail" class="form-control" type="text" name="filepath">
-                                                        <div id="err_filepath" class="invalid-feedback" style="display:block; font-size:14px"></div>
+
+                                                    <div></div>
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" name="courses_cover" id="customFile">
+                                                        <label class="custom-file-label" for="customFile">Choose file</label>
                                                     </div>
+                                                    <div id="err_courses_cover" class="invalid-feedback" style="display:block; font-size:14px"></div>
                                                     <span class="form-text text-muted">@lang('courses.tab-1-f-4-sub')</span>
 
 
@@ -234,7 +232,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-xl-6">
-                                                
+
                                             </div>
 
                                             <div class="col-xl-6" id="fm_max_user" style="display: none">
@@ -386,7 +384,7 @@
                                 <button class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-prev">
                                     @lang('courses.btn-previous')
                                 </button>
-                                <button class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-submit">
+                                <button id="btn_submit" type="submit" class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-submit">
                                     @lang('courses.btn-submit')
                                 </button>
                                 <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-next">
@@ -475,18 +473,6 @@
                 clickableSteps: true // allow step clicking
             });
 
-            // Validation before going to next page
-            wizard.on('beforeNext', function(wizardObj) {
-                if (validator.form() !== true) {
-                    wizardObj.stop(); // don't go to the next step
-                }
-            });
-
-            wizard.on('beforePrev', function(wizardObj) {
-                if (validator.form() !== true) {
-                    wizardObj.stop(); // don't go to the next step
-                }
-            });
 
             // Change event
             wizard.on('change', function(wizard) {
@@ -596,81 +582,82 @@
         }
 
         var initSubmit = function() {
-            var btn = formEl.find('[data-ktwizard-type="action-submit"]');
-
-            btn.on('click', function(e) {
-                e.preventDefault();
-
-                if (validator.form()) {
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    // See: src\js\framework\base\app.js
-                    KTApp.progress(btn);
-                    KTApp.block($('#form_wrappers'));
-
-                    // See: http://malsup.com/jquery/form/#ajaxSubmit
-                    CKEDITOR.instances.editor1.updateElement();
-                    $('.invalid-feedback').html('').text();
-                    $.ajax({
-                        url: '{{ route("srv_admin.courses.store") }}',
-                        method: 'POST',
-                        data: $('#kt_form').serialize(),
-                        success: function(response) {
-                            console.log(response);
-                            if ($.isEmptyObject(response.error)) {
-
-                                swal.fire({
-                                    "title": "@lang('courses.msg-success-title')",
-                                    "html": "@lang('courses.msg-success-content')",
-                                    "type": "success",
-                                    "confirmButtonClass": "btn btn-primary",
-                                    cancelButtonClass: "btn btn-secondary",
-                                    showCancelButton: true,
-                                    allowOutsideClick: false,
-                                    confirmButtonText: "@lang('courses.msg-next-btn')",
-                                    cancelButtonText: "@lang('courses.msg-new-btn')",
-                                }).then((result) => {
-                                    if (result.value) {
-                                        var next_loc = "{{ route('srv_admin.courses.manage',':uuid') }}"
-                                        next_loc = next_loc.replace(":uuid", response.uuid);
-                                        window.location.replace(next_loc);
-                                    } else if (
-                                        /* Read more about handling dismissals below */
-                                        result.dismiss === Swal.DismissReason.cancel
-                                    ) {
-                                        window.location.replace("{{ route('srv_admin.courses.create') }}");
-                                    }
-                                });
-                            } else {
-                                KTApp.unprogress(btn);
-                                KTApp.unblock($('#form_wrappers'));
-                                for (let [key, value] of Object.entries(response.error)) {
-                                    var errors = $('#err_'+key);
-                                    $(errors).text(value.toString());
-                                }
-                                swal.fire({
-                                    "title": "@lang('courses.msg-error-title')",
-                                    "html": "@lang('courses.msg-error-content')",
-                                    "type": "warning",
-                                    "confirmButtonClass": "btn btn-secondary"
-                                });
-
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            // var err = eval("(" + xhr.responseText + ")");
-                            console.log(xhr.responseText);
-                            console.log(status);
-                            console.log(error);
+            // var btn = formEl.find('[data-ktwizard-type="action-submit"]');
 
 
-                        }
-                    });
-                }
-            });
+
+            // btn.on('click', function(e) {
+            //     e.preventDefault();
+            //     if (validator.form()) {
+            //         $.ajaxSetup({
+            //             headers: {
+            //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //             }
+            //         });
+            //         // See: src\js\framework\base\app.js
+            //         KTApp.progress(btn);
+            //         KTApp.block($('#form_wrappers'));
+
+            //         // See: http://malsup.com/jquery/form/#ajaxSubmit
+            //         CKEDITOR.instances.editor1.updateElement();
+            //         $('.invalid-feedback').html('').text();
+            //         $.ajax({
+            //             url: '{{ route("srv_admin.courses.store") }}',
+            //             method: 'POST',
+            //             data: dataForm,
+            //             success: function(response) {
+            //                 console.log(response);
+            //                 if ($.isEmptyObject(response.error)) {
+
+            //                     swal.fire({
+            //                         "title": "@lang('courses.msg-success-title')",
+            //                         "html": "@lang('courses.msg-success-content')",
+            //                         "type": "success",
+            //                         "confirmButtonClass": "btn btn-primary",
+            //                         cancelButtonClass: "btn btn-secondary",
+            //                         showCancelButton: true,
+            //                         allowOutsideClick: false,
+            //                         confirmButtonText: "@lang('courses.msg-next-btn')",
+            //                         cancelButtonText: "@lang('courses.msg-new-btn')",
+            //                     }).then((result) => {
+            //                         if (result.value) {
+            //                             var next_loc = "{{ route('srv_admin.courses.manage',':uuid') }}"
+            //                             next_loc = next_loc.replace(":uuid", response.uuid);
+            //                             window.location.replace(next_loc);
+            //                         } else if (
+            //                             /* Read more about handling dismissals below */
+            //                             result.dismiss === Swal.DismissReason.cancel
+            //                         ) {
+            //                             window.location.replace("{{ route('srv_admin.courses.create') }}");
+            //                         }
+            //                     });
+            //                 } else {
+            //                     KTApp.unprogress(btn);
+            //                     KTApp.unblock($('#form_wrappers'));
+            //                     for (let [key, value] of Object.entries(response.error)) {
+            //                         var errors = $('#err_' + key);
+            //                         $(errors).text(value.toString());
+            //                     }
+            //                     swal.fire({
+            //                         "title": "@lang('courses.msg-error-title')",
+            //                         "html": "@lang('courses.msg-error-content')",
+            //                         "type": "warning",
+            //                         "confirmButtonClass": "btn btn-secondary"
+            //                     });
+
+            //                 }
+            //             },
+            //             error: function(xhr, status, error) {
+            //                 // var err = eval("(" + xhr.responseText + ")");
+            //                 console.log(xhr.responseText);
+            //                 console.log(status);
+            //                 console.log(error);
+
+
+            //             }
+            //         });
+            //     }
+            // });
         }
 
         return {
@@ -688,6 +675,84 @@
 
     jQuery(document).ready(function() {
         KTWizard4.init();
+    });
+
+
+    $('#kt_form').on('submit', function(e) {
+        e.preventDefault();
+        var btn = $('#btn_submit');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        // See: src\js\framework\base\app.js
+        KTApp.progress(btn);
+        KTApp.block($('#form_wrappers'));
+
+        let dataForm = new FormData(this);
+
+        // See: http://malsup.com/jquery/form/#ajaxSubmit
+        CKEDITOR.instances.editor1.updateElement();
+        $('.invalid-feedback').html('').text();
+        $.ajax({
+            url: '{{ route("srv_admin.courses.store") }}',
+            method: 'POST',
+            data: dataForm,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                console.log(response);
+                if ($.isEmptyObject(response.error)) {
+
+                    swal.fire({
+                        "title": "@lang('courses.msg-success-title')",
+                        "html": "@lang('courses.msg-success-content')",
+                        "type": "success",
+                        "confirmButtonClass": "btn btn-primary",
+                        cancelButtonClass: "btn btn-secondary",
+                        showCancelButton: true,
+                        allowOutsideClick: false,
+                        confirmButtonText: "@lang('courses.msg-next-btn')",
+                        cancelButtonText: "@lang('courses.msg-new-btn')",
+                    }).then((result) => {
+                        if (result.value) {
+                            var next_loc = "{{ route('srv_admin.courses.manage',':uuid') }}"
+                            next_loc = next_loc.replace(":uuid", response.uuid);
+                            window.location.replace(next_loc);
+                        } else if (
+                            /* Read more about handling dismissals below */
+                            result.dismiss === Swal.DismissReason.cancel
+                        ) {
+                            window.location.replace("{{ route('srv_admin.courses.create') }}");
+                        }
+                    });
+                } else {
+                    KTApp.unprogress(btn);
+                    KTApp.unblock($('#form_wrappers'));
+                    for (let [key, value] of Object.entries(response.error)) {
+                        var errors = $('#err_' + key);
+                        $(errors).text(value.toString());
+                    }
+                    swal.fire({
+                        "title": "@lang('courses.msg-error-title')",
+                        "html": "@lang('courses.msg-error-content')",
+                        "type": "warning",
+                        "confirmButtonClass": "btn btn-secondary"
+                    });
+
+                }
+            },
+            error: function(xhr, status, error) {
+                // var err = eval("(" + xhr.responseText + ")");
+                console.log(xhr.responseText);
+                console.log(status);
+                console.log(error);
+
+
+            }
+        });
+
     });
 </script>
 

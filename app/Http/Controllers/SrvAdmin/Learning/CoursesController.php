@@ -55,10 +55,13 @@ class CoursesController extends Controller
     }
 
     public function store(Request $request){
+        $my = auth()->user();
+
         $validatorRule = [
             'ctitle' => 'required',
             'cdesc' => 'required',
             'start_date'    => 'required|date',
+            'courses_cover' => 'image',
         ];
 
         if(!$request->is_no_end_time){
@@ -68,7 +71,7 @@ class CoursesController extends Controller
         $validateData = Validator::make($request->all(), $validatorRule);
 
         if ($validateData->passes()) {
-            $courses = DB::transaction(function () use ($request) {
+            $courses = DB::transaction(function () use ($request, $my) {
                 $share_link = '';
                 $user_max = 0;
                 $start_date = null;
@@ -76,10 +79,16 @@ class CoursesController extends Controller
                 $courses_price = 0;
                 $uuid = Str::orderedUuid();
 
-//                 Deprecated
-//                if ($request->share_link) {
-//                    $share_link = route('student.learning.join', [$uuid]);
-//                }
+                // Moving Cover
+                $fileUrl = '';
+                if($request->courses_cover){
+                    $ext = $request->courses_cover->getClientOriginalExtension();
+                    $fileName = Str::slug($request->ctitle.' '.strtotime('now')).'.'.$ext;
+                    $request->courses_cover->move(
+                        public_path('storage/' . $my->company->uuid . '/cover/'),$fileName);
+                    $fileUrl = asset('storage/' . $my->company->uuid . '/cover/'.$fileName);
+                }
+
 
                 if ($request->is_unlimited_users) {
                     $user_max = $request->max_user;
@@ -89,7 +98,6 @@ class CoursesController extends Controller
                 if ($request->is_no_end_time) {
                     $end_date = Carbon::parse('9999-12-30')->format('Y-m-d H:i');
 
-                    // $end_time = Carbon::parse($request->end_time)->format('Y-m-d');
                 }else{
                     $end_date = Carbon::parse($request->end_date)->format('Y-m-d H:i');
                 }
@@ -100,11 +108,11 @@ class CoursesController extends Controller
 
                 $courses = CoursesModel::create([
                     'title' => $request->ctitle,
-                    'id_company' => auth()->user()->company->id_company,
+                    'id_company' => $my->company->id_company,
                     'uuid' => $uuid,
                     'category' => $request->ccategory,
                     'descriptions' => $request->cdesc,
-                    'cover_img_url' => $request->filepath,
+                    'cover_img_url' => $fileUrl,
                     'is_manual_add' => 1,
                     'is_share_link' => ($request->share_link) ? 1 : 0,
                     'is_unlimited_users' => ($request->is_unlimited_users) ? 1 : 0,
@@ -115,14 +123,14 @@ class CoursesController extends Controller
                     'is_free' => ($request->is_free_course) ? 1 : 0,
                     'is_private' => ($request->is_private) ? 1 : 0,
                     'courses_price' => $courses_price,
-                    'created_by' => auth()->user()->id,
+                    'created_by' => $my->id,
                 ]);
 
                 CoursesParticipantModel::create([
                     'id_courses'=>$courses->id_courses,
-                    'id_participant' => auth()->user()->id,
-                    'created_by' => auth()->user()->id,
-                    'id_company' => auth()->user()->active_session,
+                    'id_participant' => $my->id,
+                    'created_by' => $my->id,
+                    'id_company' => $my->active_session,
                     'status' => 1
                 ]);
 
