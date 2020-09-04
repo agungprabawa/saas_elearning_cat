@@ -7,6 +7,47 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+## Note
+Untuk vendor laravel file manager, perlu dilakukan penyesuaian pada bagian __construct (vendor\unisharp\laravel-filemanager\src\Lfm.php)
+```sh
+use App\Models\Companies\CompanySubscribtions;
+public function __construct(Config $config = null, Request $request = null)
+{
+    $my = auth()->user();
+    if($my->active_status == 3){
+        abort(403, 'Unauthorized action.');
+    }
+
+    if($my->active_status == 1 || $my->active_status == 2){
+        $currentSubsSize = CompanySubscribtions::select('size')->where('id_company', '=', auth()->user()->active_session)
+        ->where('id_srv_attribute', '=', 4)
+        ->first();
+        $gbToKB = $currentSubsSize->size * 1024 * 1024;
+        config([
+            'filesystems.disks.public.root' => storage_path('app/public/'.$my->company->uuid),
+            'filesystems.disks.public.url' => env('APP_URL').'/storage/'.$my->company->uuid,
+            'lfm.file.max_size' => $gbToKB,
+            'lfm.image.max_size' => $gbToKB,
+        ]);
+    }else if($my->active_status == -1){
+        config([
+            'filesystems.disks.public.root' => storage_path('app/public/'),
+            'filesystems.disks.public.url' => env('APP_URL').'/storage/',
+        ]);
+    }
+
+    $this->config = $config;
+    $this->request = $request;
+}
+```
+Dan pada bagian userField (vendor\unisharp\laravel-filemanager\src\Handlers\ConfigHandler.php)
+return nilai statis ex: 1
+```sh
+return 1
+```
+#### Modifikasi ini tidak akan diperlukan bila versi 2 sudah rampung
+
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
